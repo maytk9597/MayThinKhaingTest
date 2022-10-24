@@ -1,10 +1,28 @@
-import {weatherAppID, weatherBaseURL} from './config';
+import {API_URL, weatherAppID, weatherBaseURL} from './config';
 
 export const fetchWeatherAPI = async (Lat, Lon) => {
   try {
     let response = await fetch(
       `${weatherBaseURL}lat=${Lat}&lon=${Lon}&appid=${weatherAppID}`,
     );
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const fetchUsageAPI = async date => {
+  try {
+    let response = await fetch(`${API_URL}tutorials?date=${date}`);
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const fetchTotalUsageAPI = async date => {
+  try {
+    let response = await fetch(`${API_URL}tutorials/total?date=${date}`);
     let json = await response.json();
     return json;
   } catch (error) {

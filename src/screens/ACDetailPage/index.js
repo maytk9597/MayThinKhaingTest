@@ -2,23 +2,18 @@ import React, {useState} from 'react';
 import {Pressable, StatusBar, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ACCard from '../../components/ACCard';
+import CircleSlider from '../../components/CircularSlider';
 import {BLACK, WHITE} from '../../styles/colors';
 import {windowHeight, windowWidth} from '../../styles/mixins';
+import ACDetailPageStyle from './style';
 
 const ACDetailPage = ({navigation}) => {
   const [select, setSelect] = useState('temperature');
+  const [value, setValue] = useState();
   return (
     <View>
       <StatusBar backgroundColor="transparent" translucent={false} />
-      <View
-        style={{
-          height: 50,
-          flexDirection: 'row',
-          paddingHorizontal: 30,
-          paddingVertical: 10,
-          alignContent: 'center',
-          justifyContent: 'space-between',
-        }}>
+      <View style={ACDetailPageStyle.backBtnContainer}>
         <Icon
           name="chevron-back"
           size={30}
@@ -27,67 +22,29 @@ const ACDetailPage = ({navigation}) => {
         />
         <Icon name="md-settings-outline" size={23} color={BLACK} />
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          marginVertical: 10,
-          marginHorizontal: 30,
-          alignContent: 'center',
-          justifyContent: 'center',
-          borderRadius: 25,
-          backgroundColor: WHITE,
-          alignItems: 'center',
-        }}>
+      <View style={ACDetailPageStyle.btnContainer}>
         <Pressable
           onPress={() => setSelect('temperature')}
-          style={{
-            backgroundColor: select == 'temperature' ? BLACK : WHITE,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            borderRadius: 25,
-            width: '50%',
-          }}>
-          <Text
-            style={{
-              color: select == 'temperature' ? WHITE : BLACK,
-              fontSize: 16,
-              textAlign: 'center',
-            }}>
-            Temperature
-          </Text>
+          style={ACDetailPageStyle.tempContainer(select)}>
+          <Text style={ACDetailPageStyle.txtStyle(select)}>Temperature</Text>
         </Pressable>
         <Pressable
           onPress={() => setSelect('statics')}
-          style={{
-            backgroundColor: select == 'temperature' ? WHITE : BLACK,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            borderRadius: 25,
-            width: '50%',
-            alignSelf: 'flex-start',
-          }}>
-          <Text
-            style={{
-              color: select == 'temperature' ? BLACK : WHITE,
-              fontSize: 16,
-              textAlign: 'center',
-            }}>
-            Statics
-          </Text>
+          style={ACDetailPageStyle.staticsContainer(select)}>
+          <Text style={ACDetailPageStyle.staticTxtStyle(select)}>Statics</Text>
         </Pressable>
       </View>
-      <View
-        style={{height: windowHeight * 0.45, backgroundColor: BLACK}}></View>
-      <View
-        style={{
-          flexDirection: 'row',
-          marginVertical: 10,
-          marginHorizontal: 30,
-          alignContent: 'center',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <ACCard text={'24°'} title={'Temperature'} />
+      <View style={ACDetailPageStyle.sliderContainer}>
+        <CircleSlider
+          value={value}
+          dialRadius={150}
+          textColor={'white'}
+          startCoord={0}
+          onValueChange={value => setValue(value)}
+        />
+      </View>
+      <View style={ACDetailPageStyle.cardContainer}>
+        <ACCard text={`${value}`} title={'Temperature'} />
         <ACCard text={'47%'} title={'Humidity'} />
       </View>
     </View>

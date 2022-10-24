@@ -15,6 +15,7 @@ import {
   WHITE,
 } from '../../styles/colors';
 import {subPageData, windowHeight, windowWidth} from '../../styles/mixins';
+import SubPageStyle from './style';
 const SubPage = ({navigation}) => {
   const handleOnPress = item => {
     navigation.navigate('Detail Sub Page', item);
@@ -29,44 +30,14 @@ const SubPage = ({navigation}) => {
             <Pressable onPress={() => handleOnPress(item)}>
               <ImageBackground
                 source={item.src}
-                style={{
-                  height: windowHeight * 0.4,
-                  width: windowWidth,
-                  resizeMode: 'contain',
-                }}>
-                <View
-                  style={{
-                    height: '100%',
-                    width: '30%',
-                    backgroundColor: BLACkwithOpacity,
-                    justifyContent: 'center',
-                    paddingHorizontal: 15,
-                  }}>
-                  <Text
-                    style={{
-                      color: detailTitleTxt,
-                      fontSize: 40,
-                      fontWeight: 'bold',
-                    }}>
-                    {item.id}
-                  </Text>
-                  <Text
-                    style={{
-                      color: detailTitleTxt,
-                      fontSize: 25,
-                      marginVertical: 10,
-                    }}>
-                    {item.month}
-                  </Text>
+                style={SubPageStyle.imgBackground}>
+                <View style={SubPageStyle.mainContainer}>
+                  <Text style={SubPageStyle.monthNumContainer}>{item.id}</Text>
+                  <Text style={SubPageStyle.monthContainer}>{item.month}</Text>
                   <Text style={{color: detailTitleTxt}}>{item.event}</Text>
                   <Pressable
                     onPress={() => handleOnPress(item)}
-                    style={{
-                      marginTop: 15,
-                      padding: 3,
-                      backgroundColor: 'grey',
-                      borderRadius: 6,
-                    }}>
+                    style={SubPageStyle.pressContainer}>
                     <Text style={{fontSize: 12}}> More Details</Text>
                   </Pressable>
                 </View>

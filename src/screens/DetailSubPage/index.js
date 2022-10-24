@@ -2,71 +2,25 @@ import * as React from 'react';
 import {ImageBackground, Text, View} from 'react-native';
 import {detailTitleTxt, detainTxtColor, WHITE} from '../../styles/colors';
 import {windowHeight, windowWidth} from '../../styles/mixins';
+import DetailSubPageStyle from './style';
 const DetailSubPage = ({navigation, route}) => {
   const item = route.params;
   return (
     <View>
-      <ImageBackground
-        source={item.src}
-        style={{
-          height: windowHeight * 0.4,
-          justifyContent: 'flex-end',
-          padding: 20,
-        }}>
-        <Text
-          style={{
-            color: detailTitleTxt,
-            fontSize: 30,
-            fontWeight: '800',
-            width: '70%',
-          }}>
-          {item.activity}
-        </Text>
+      <ImageBackground source={item.src} style={DetailSubPageStyle.imgBgStyle}>
+        <Text style={DetailSubPageStyle.activityTxtStyle}>{item.activity}</Text>
       </ImageBackground>
       <View style={{padding: 20}}>
         <View
           style={{
             width: windowWidth * 0.6,
           }}>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 40,
-              paddingBottom: 10,
-              fontWeight: '600',
-            }}>
-            {item.id}
-          </Text>
-          <View
-            style={{
-              borderTopColor: detainTxtColor,
-              borderTopWidth: 1,
-              alignSelf: 'flex-start',
-            }}>
-            <Text
-              style={{
-                color: detainTxtColor,
-                fontSize: 30,
-                paddingVertical: 10,
-                fontWeight: '600',
-              }}>
-              {item.month}
-            </Text>
-            <Text
-              style={{
-                color: detainTxtColor,
-                fontSize: 18,
-                paddingBottom: 10,
-              }}>
-              {item.event}
-            </Text>
+          <Text style={DetailSubPageStyle.numMonthStyle}>{item.id}</Text>
+          <View style={DetailSubPageStyle.monthContainer}>
+            <Text style={DetailSubPageStyle.monthTxtStyle}>{item.month}</Text>
+            <Text style={DetailSubPageStyle.eventContainer}>{item.event}</Text>
           </View>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 10,
-              paddingBottom: 10,
-            }}>
+          <Text style={DetailSubPageStyle.txtContainer}>
             Lorem ipsum dolor sit amet. Hic blanditiis quod a laboriosam
             consequatur aut reiciendis numquam hic quisquam assumenda aut
             voluptatibus voluptatum qui ipsa animi. Sit nisi voluptas est
@@ -80,54 +34,11 @@ const DetailSubPage = ({navigation, route}) => {
             width: '40%',
             alignSelf: 'flex-end',
           }}>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 15,
-              paddingBottom: 5,
-              borderBottomColor: detainTxtColor,
-              borderBottomWidth: 1,
-            }}>
-            Location
-          </Text>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 12,
-              paddingBottom: 20,
-              fontWeight: '800',
-            }}>
-            EVENT LOCATION
-          </Text>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 15,
-              paddingBottom: 5,
-              borderBottomColor: detainTxtColor,
-              borderBottomWidth: 1,
-            }}>
-            Time
-          </Text>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 12,
-              paddingBottom: 20,
-              fontWeight: '800',
-            }}>
-            16:00 Am .{'\n'}18:00 Am
-          </Text>
-          <Text
-            style={{
-              color: detainTxtColor,
-              fontSize: 15,
-              paddingBottom: 5,
-              borderBottomColor: detainTxtColor,
-              borderBottomWidth: 1,
-            }}>
-            Back
-          </Text>
+          <Text style={DetailSubPageStyle.locationContainer}>Location</Text>
+          <Text style={DetailSubPageStyle.location}>EVENT LOCATION</Text>
+          <Text style={DetailSubPageStyle.timeContainer}>Time</Text>
+          <Text style={DetailSubPageStyle.time}>16:00 Am .{'\n'}18:00 Am</Text>
+          <Text style={DetailSubPageStyle.backTxt}>Back</Text>
         </View>
       </View>
     </View>

@@ -12,6 +12,7 @@ import {BarChart} from 'react-native-gifted-charts';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ComponentCard from '../../components/componentCard';
 import ProfileInfo from '../../components/profileInfo';
+import UsageCard from '../../components/usageCard';
 import {
   BLACK,
   cardBackground,
@@ -24,28 +25,44 @@ import {
   WHITE,
 } from '../../styles/colors';
 import {windowHeight, windowWidth} from '../../styles/mixins';
-import {dataSource, transformDataForBarChart} from '../../utils';
+import {
+  dataSource,
+  fetchTotalUsageAPI,
+  transformDataForBarChart,
+} from '../../utils';
+import MainPageStyle from './style';
 
 const MainPage = ({navigation}) => {
   const [data, setData] = useState(dataSource);
+  const [total, setTotal] = useState(0);
   const toggleSwitch = (value, index) => {
     const newData = [...data];
     newData[index].switch = value;
     setData(newData);
   };
+  const fetchTotalUsageData = async () => {
+    await fetchTotalUsageAPI('2022-10-23').then(data => {
+      {
+        setTotal(data[0].total);
+      }
+    });
+  };
+  useEffect(() => {
+    fetchTotalUsageData();
+  }, []);
   return (
     <SafeAreaView>
       <StatusBar translucent={false} />
       <ProfileInfo />
-      <View
-        style={{
-          height: windowHeight * 0.27,
-          backgroundColor: UsageCARD,
-        }}></View>
-      <View style={{paddingHorizontal: 10, paddingVertical: 10}}>
-        <Text style={{color: txtColor, fontSize: 25, padding: 5}}>
-          Smart Devices
-        </Text>
+      <View style={MainPageStyle.usageCardContainer}>
+        <View style={MainPageStyle.usageContainer}>
+          <Text style={{paddingHorizontal: 10}}>Total Usage</Text>
+          <Text style={MainPageStyle.amountContainer}>{total}kw</Text>
+        </View>
+        <UsageCard />
+      </View>
+      <View style={MainPageStyle.mainContainer}>
+        <Text style={MainPageStyle.titleContainer}>Smart Devices</Text>
         <FlatList
           data={data}
           renderItem={({item, index}) => (
