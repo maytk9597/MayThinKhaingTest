@@ -10,8 +10,9 @@ run server in server/energy_consumption/ directory using
 node server.js
 ```
 
-run
+run 
 
 ```bash
 adb reverse tcp:8080 tcp:8080
 ```
+in project directory
