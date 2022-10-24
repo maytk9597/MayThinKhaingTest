@@ -34,7 +34,7 @@ export default usageCard = () => {
                   borderRadius: 20,
                   backgroundColor: item.id % 2 == 0 ? PRIMARYTXTCOLOR : BLACK,
                 }}></View>
-              <Text style={{color: BLACK}}>{item.data}kw</Text>
+              <Text style={{color: BLACK}}>{item.time}</Text>
             </View>
           );
         }}

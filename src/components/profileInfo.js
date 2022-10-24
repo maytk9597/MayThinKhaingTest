@@ -23,6 +23,7 @@ export default profileInfo = () => {
           <Text>25 device on</Text>
         </View>
       </View>
+      <Text style={styles.tempTxt}>24°C</Text>
     </View>
   );
 };
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: windowHeight * 0.12,
     paddingHorizontal: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   container: {
     height: '100%',
@@ -43,4 +47,11 @@ const styles = StyleSheet.create({
   txtColor: {color: txtColor},
   txtContainer: {flexDirection: 'row', paddingBottom: 5},
   nameTxt: {fontWeight: 'bold'},
+  tempTxt: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    backgroundColor: '#F3F6F2',
+    color: '#B8BEB2',
+  },
 });
